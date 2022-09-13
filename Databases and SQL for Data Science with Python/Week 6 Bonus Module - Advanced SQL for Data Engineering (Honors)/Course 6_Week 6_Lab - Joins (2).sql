@@ -1,0 +1,23 @@
+-- Problem 1 
+-- List the case number, type of crime and community area for all crimes in community area number 18.
+SELECT CCD.CASE_NUMBER, CCD.PRIMARY_TYPE, CD.COMMUNITY_AREA_NAME
+FROM CHICAGO_CRIME_DATA AS CCD
+INNER JOIN CENSUS_DATA AS CD ON CCD.COMMUNITY_AREA_NUMBER = CD.COMMUNITY_AREA_NUMBER
+WHERE CCD.COMMUNITY_AREA_NUMBER = '18';
+
+
+-- Problem 2 
+-- List all crimes that took place at a school. Include case number, crime type and community name.
+SELECT CCD.CASE_NUMBER, CCD.PRIMARY_TYPE, CD.COMMUNITY_AREA_NAME
+FROM CHICAGO_CRIME_DATA AS CCD
+LEFT JOIN CENSUS_DATA AS CD ON CCD.COMMUNITY_AREA_NUMBER = CD.COMMUNITY_AREA_NUMBER
+WHERE CCD.LOCATION_DESCRIPTION LIKE '%SCHOOL%';
+
+
+-- Problem 3 
+-- For the communities of Oakland, Armour Square, Edgewater and CHICAGO list the associated community_area_numbers and the case_numbers. 
+SELECT CCD.COMMUNITY_AREA_NUMBER, CCD.CASE_NUMBER, CD.COMMUNITY_AREA_NAME
+FROM CHICAGO_CRIME_DATA AS CCD
+FULL OUTER JOIN CENSUS_DATA AS CD ON CCD.COMMUNITY_AREA_NUMBER = CD.COMMUNITY_AREA_NUMBER
+WHERE CD.COMMUNITY_AREA_NAME IN ('Oakland', 'Armour Square', 'Edgewater', 'CHICAGO');
+
